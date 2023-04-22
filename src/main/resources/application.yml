@@ -1,1 +1,15 @@
-
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/family_events_book?useSSL=true&useUnicode=true&serverTimezone=Asia/Seoul
+    username: family_events_book
+    password: family_events_book
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+        hibernate:
+          format_sql: true
