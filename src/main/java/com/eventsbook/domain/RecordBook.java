@@ -67,4 +67,53 @@ public class RecordBook {
     @Column(name = "updated_at", nullable = false)
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    private RecordBook(Long userId,
+                       Friend friend,
+                       BigDecimal money,
+                       EventType eventType,
+                       TransactionType transactionType,
+                       String memo,
+                       LocalDate transactionDate) {
+        if (money.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("금액은 마이너스가 될 수 없습니다.");
+        }
+        this.userId = userId;
+        this.friend = friend;
+        this.money = money;
+        this.eventType = eventType;
+        this.transactionType = transactionType;
+        this.memo = memo;
+        this.transactionDate = transactionDate;
+    }
+
+    public static RecordBook ofSent(Long userId,
+                                    Friend friend,
+                                    BigDecimal money,
+                                    EventType eventType,
+                                    String memo,
+                                    LocalDate transactionDate) {
+        return new RecordBook(userId,
+                friend,
+                money,
+                eventType,
+                TransactionType.SENT,
+                memo,
+                transactionDate);
+    }
+
+    public static RecordBook ofReceived(Long userId,
+                                        String friendName,
+                                        BigDecimal money,
+                                        EventType eventType,
+                                        String memo,
+                                        LocalDate transactionDate) {
+        return new RecordBook(userId,
+                new Friend(friendName, null),
+                money,
+                eventType,
+                TransactionType.RECEIVED,
+                memo,
+                transactionDate);
+    }
 }
