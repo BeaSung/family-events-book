@@ -19,7 +19,7 @@ public class RecordBookService {
 
     @Transactional
     public void addSentMoneyRecord(Long userId, AddSentMoneyRecordRequest request) {
-        RecordBook recordBook = RecordBook.ofSent(userId,
+        var recordBook = RecordBook.ofSent(userId,
                 new Friend(request.getFriendName(), request.getRelationshipWithFriend()),
                 new BigDecimal(request.getMoney()),
                 request.getEventType(),
@@ -31,7 +31,7 @@ public class RecordBookService {
 
     @Transactional
     public void addReceivedMoneyRecord(Long userId, AddReceivedMoneyRecordRequest request) {
-        RecordBook recordBook = RecordBook.ofReceived(userId,
+        var recordBook = RecordBook.ofReceived(userId,
                 request.getFriendName(),
                 new BigDecimal(request.getMoney()),
                 request.getEventType(),
