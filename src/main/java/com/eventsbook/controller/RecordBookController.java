@@ -3,6 +3,8 @@ package com.eventsbook.controller;
 import com.eventsbook.controller.request.AddReceivedMoneyRecordRequest;
 import com.eventsbook.controller.request.AddSentMoneyRecordRequest;
 import com.eventsbook.controller.response.GetRecordBooksResponse;
+import com.eventsbook.domain.EventType;
+import com.eventsbook.domain.TransactionType;
 import com.eventsbook.service.RecordBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/records")
@@ -30,7 +36,11 @@ public class RecordBookController {
     }
 
     @GetMapping
-    public GetRecordBooksResponse getRecordBooks(@RequestParam(required = false) Long lastId) {
-        return new GetRecordBooksResponse();
+    public GetRecordBooksResponse getRecordBooks(@RequestParam(required = false) LocalDate lastDate,
+                                                 @RequestParam(required = false) Long lastRecordId,
+                                                 @RequestParam(required = false) TransactionType transactionType,
+                                                 @RequestParam(required = false) EventType eventType,
+                                                 @RequestParam(required = false) YearMonth yearMonth) {
+        return new GetRecordBooksResponse(List.of());
     }
 }
