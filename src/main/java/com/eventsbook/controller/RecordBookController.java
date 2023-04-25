@@ -2,6 +2,7 @@ package com.eventsbook.controller;
 
 import com.eventsbook.controller.request.AddReceivedMoneyRecordRequest;
 import com.eventsbook.controller.request.AddSentMoneyRecordRequest;
+import com.eventsbook.controller.request.UpdateSentMoneyRecordRequest;
 import com.eventsbook.controller.response.GetRecordBooksResponse;
 import com.eventsbook.controller.response.GetRecordBooksResponse.GetRecordBookDTO;
 import com.eventsbook.domain.EventType;
@@ -10,7 +11,9 @@ import com.eventsbook.service.GetRecordBookService;
 import com.eventsbook.service.RecordBookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,5 +51,10 @@ public class RecordBookController {
         return new GetRecordBooksResponse(recordBooks.stream()
                 .map(GetRecordBookDTO::new)
                 .toList());
+    }
+
+    @PutMapping("/sent-money/{recordId}")
+    public void updateSentMoneyRecord(@PathVariable Long recordId, @RequestBody UpdateSentMoneyRecordRequest request) {
+        service.updateSentMoneyRecord(recordId, request);
     }
 }

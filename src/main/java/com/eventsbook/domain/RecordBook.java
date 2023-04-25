@@ -119,4 +119,17 @@ public class RecordBook {
                 memo,
                 transactionDate);
     }
+
+    public void changeSentMoneyRecord(String friendName,
+                                      String relationshipWithFriend,
+                                      BigDecimal money,
+                                      EventType eventType,
+                                      String memo,
+                                      LocalDate transactionDate) {
+        this.friend = new Friend(friendName, relationshipWithFriend);
+        this.money = money;
+        this.eventType = eventType;
+        this.memo = memo;
+        this.transactionDate = transactionDate;
+    }
 }
