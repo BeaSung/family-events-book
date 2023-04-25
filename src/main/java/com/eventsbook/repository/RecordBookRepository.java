@@ -90,5 +90,4 @@ public interface RecordBookRepository extends JpaRepository<RecordBook, Long> {
     List<RecordBook> findRecordsByMonth(@Param("userId") Long userId,
                                         @Param("startDate") LocalDate startDate,
                                         @Param("endDate") LocalDate endDate);
-
 }
