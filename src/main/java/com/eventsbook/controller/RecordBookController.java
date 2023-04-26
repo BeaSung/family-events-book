@@ -10,6 +10,7 @@ import com.eventsbook.domain.TransactionType;
 import com.eventsbook.service.GetRecordBookService;
 import com.eventsbook.service.RecordBookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,5 +57,10 @@ public class RecordBookController {
     @PutMapping("/sent-money/{recordId}")
     public void updateSentMoneyRecord(@PathVariable Long recordId, @RequestBody UpdateSentMoneyRecordRequest request) {
         service.updateSentMoneyRecord(recordId, request);
+    }
+
+    @DeleteMapping("/{recordId}")
+    public void deleteRecord(@PathVariable Long recordId) {
+        service.deleteRecord(recordId);
     }
 }

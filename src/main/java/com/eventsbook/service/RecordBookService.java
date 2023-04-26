@@ -54,4 +54,9 @@ public class RecordBookService {
                 request.getMemo(),
                 request.getTransactionDate());
     }
+
+    @Transactional
+    public void deleteRecord(Long recordId) {
+        repository.deleteById(recordId);
+    }
 }
