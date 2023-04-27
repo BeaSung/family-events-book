@@ -2,6 +2,7 @@ package com.eventsbook.controller;
 
 import com.eventsbook.controller.request.AddReceivedMoneyRecordRequest;
 import com.eventsbook.controller.request.AddSentMoneyRecordRequest;
+import com.eventsbook.controller.request.UpdateReceivedMoneyRecordRequest;
 import com.eventsbook.controller.request.UpdateSentMoneyRecordRequest;
 import com.eventsbook.controller.response.GetRecordBooksResponse;
 import com.eventsbook.controller.response.GetRecordBooksResponse.GetRecordBookDTO;
@@ -44,10 +45,11 @@ public class RecordBookController {
     @GetMapping
     public GetRecordBooksResponse getRecordBooks(@RequestParam(required = false) LocalDate lastDate,
                                                  @RequestParam(required = false) Long lastRecordId,
+                                                 @RequestParam(required = false) String friendName,
                                                  @RequestParam(required = false) TransactionType transactionType,
                                                  @RequestParam(required = false) EventType eventType,
                                                  @RequestParam(required = false) YearMonth yearMonth) {
-        var recordBooks = getRecordBookService.getRecordBooks(0L, lastDate, lastRecordId, transactionType, eventType, yearMonth);
+        var recordBooks = getRecordBookService.getRecordBooks(0L, lastDate, lastRecordId, friendName, transactionType, eventType, yearMonth);
 
         return new GetRecordBooksResponse(recordBooks.stream()
                 .map(GetRecordBookDTO::new)
@@ -57,6 +59,11 @@ public class RecordBookController {
     @PutMapping("/sent-money/{recordId}")
     public void updateSentMoneyRecord(@PathVariable Long recordId, @RequestBody UpdateSentMoneyRecordRequest request) {
         service.updateSentMoneyRecord(recordId, request);
+    }
+
+    @PutMapping("/received-money/{recordId}")
+    public void updateReceivedMoneyRecord(@PathVariable Long recordId, @RequestBody UpdateReceivedMoneyRecordRequest request) {
+        service.updateReceivedMoneyRecord(recordId, request);
     }
 
     @DeleteMapping("/{recordId}")

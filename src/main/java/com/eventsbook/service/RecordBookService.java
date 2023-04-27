@@ -2,6 +2,7 @@ package com.eventsbook.service;
 
 import com.eventsbook.controller.request.AddReceivedMoneyRecordRequest;
 import com.eventsbook.controller.request.AddSentMoneyRecordRequest;
+import com.eventsbook.controller.request.UpdateReceivedMoneyRecordRequest;
 import com.eventsbook.controller.request.UpdateSentMoneyRecordRequest;
 import com.eventsbook.domain.Friend;
 import com.eventsbook.domain.RecordBook;
@@ -49,6 +50,18 @@ public class RecordBookService {
 
         recordBook.changeSentMoneyRecord(request.getFriendName(),
                 request.getRelationshipWithFriend(),
+                new BigDecimal(request.getMoney()),
+                request.getEventType(),
+                request.getMemo(),
+                request.getTransactionDate());
+    }
+
+    @Transactional
+    public void updateReceivedMoneyRecord(Long recordId, UpdateReceivedMoneyRecordRequest request) {
+        RecordBook recordBook = repository.findById(recordId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 정보입니다."));
+
+        recordBook.changeReceivedMoneyRecord(request.getFriendName(),
                 new BigDecimal(request.getMoney()),
                 request.getEventType(),
                 request.getMemo(),
