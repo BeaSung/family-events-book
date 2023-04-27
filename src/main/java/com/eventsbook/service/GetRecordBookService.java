@@ -24,10 +24,13 @@ public class GetRecordBookService {
     public List<RecordBook> getRecordBooks(Long userId,
                                            @Nullable LocalDate lastDate,
                                            @Nullable Long lastRecordId,
+                                           @Nullable String friendName,
                                            @Nullable TransactionType transactionType,
                                            @Nullable EventType eventType,
                                            @Nullable YearMonth yearMonth) {
-        if (transactionType != null) {
+        if (friendName != null) {
+            return getRecordsByFriendName(userId, friendName);
+        } else if (transactionType != null) {
             return getRecordsByTransactionType(userId, transactionType, lastDate, lastRecordId);
         } else if (eventType != null) {
             return getRecordsByEventType(userId, eventType, lastDate, lastRecordId);
@@ -84,5 +87,9 @@ public class GetRecordBookService {
 
     private List<RecordBook> getRecordsByMonth(Long userId, YearMonth yearMonth) {
         return repository.findRecordsByMonth(userId, yearMonth.atDay(1), yearMonth.atEndOfMonth());
+    }
+
+    private List<RecordBook> getRecordsByFriendName(Long userId, String friendName) {
+        return repository.findRecordsByFriendName(userId, friendName);
     }
 }

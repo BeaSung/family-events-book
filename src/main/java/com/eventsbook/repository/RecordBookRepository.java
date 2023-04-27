@@ -33,6 +33,16 @@ public interface RecordBookRepository extends JpaRepository<RecordBook, Long> {
             SELECT r
             FROM RecordBook r
             WHERE r.userId = :userId
+            AND r.friend.name = :friendName
+            ORDER BY r.transactionDate DESC
+            """)
+    List<RecordBook> findRecordsByFriendName(@Param("userId") Long userId,
+                                     @Param("friendName") String friendName);
+
+    @Query("""
+            SELECT r
+            FROM RecordBook r
+            WHERE r.userId = :userId
             AND r.transactionType = :transactionType
             ORDER BY r.transactionDate DESC
             """)
