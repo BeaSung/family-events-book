@@ -15,6 +15,8 @@ public interface RecordBookRepository extends JpaRepository<RecordBook, Long> {
 
     List<RecordBook> findTop10ByUserIdOrderByTransactionDateDesc(Long userId);
 
+    List<RecordBook> findAllByUserId(Long userId);
+
     // JPQL 에서는 Limit query 가 없어서 Pageable 로 대체한다
     @Query("""
             SELECT r

@@ -6,6 +6,7 @@ import com.eventsbook.controller.request.UpdateReceivedMoneyRecordRequest;
 import com.eventsbook.controller.request.UpdateSentMoneyRecordRequest;
 import com.eventsbook.controller.response.GetRecordBooksResponse;
 import com.eventsbook.controller.response.GetRecordBooksResponse.GetRecordBookDTO;
+import com.eventsbook.controller.response.GetSearchKeywordsResponse;
 import com.eventsbook.domain.EventType;
 import com.eventsbook.domain.TransactionType;
 import com.eventsbook.service.GetRecordBookService;
@@ -69,5 +70,11 @@ public class RecordBookController {
     @DeleteMapping("/{recordId}")
     public void deleteRecord(@PathVariable Long recordId) {
         service.deleteRecord(recordId);
+    }
+
+    @GetMapping("/search/keywords")
+    public GetSearchKeywordsResponse getSearchKeywords() {
+        var friendNames = getRecordBookService.getRegisteredFriendNames(0L);
+        return new GetSearchKeywordsResponse(friendNames);
     }
 }

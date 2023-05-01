@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -19,6 +20,16 @@ import java.util.List;
 public class GetRecordBookService {
 
     private final RecordBookRepository repository;
+
+    @Transactional(readOnly = true)
+    public List<String> getRegisteredFriendNames(Long userId) {
+        return repository.findAllByUserId(userId)
+                .stream()
+                .map(recordBook -> recordBook.getFriend().getName())
+                .distinct()
+                .sorted(Comparator.naturalOrder())
+                .toList();
+    }
 
     @Transactional(readOnly = true)
     public List<RecordBook> getRecordBooks(Long userId,
