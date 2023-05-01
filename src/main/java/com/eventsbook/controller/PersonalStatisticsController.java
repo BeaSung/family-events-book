@@ -15,7 +15,7 @@ public class PersonalStatisticsController {
 
     @GetMapping("/records/personal-statistics")
     public GetPersonalStatisticsResponse getPersonalStatistics() {
-        var personalStatistics = service.getPersonalStatistics(1L);
+        var personalStatistics = service.getPersonalStatistics(0L);
         if (personalStatistics.isEmpty()) {
             return null;
         } else {
