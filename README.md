@@ -40,3 +40,14 @@
 
 - 검색 조건이 다양해짐에 따라, RecordBookService 에 조회용 메서드가 많아지고 클래스 라인이 길어졌다.
 - 그래서 조회용 메서드들만 GetRecordBookService 클래스로 추출해 보았다.
+
+## Git Convention
+
+#### Commit message type
+
+- feat : 신규 기능 추가
+- fix : 버그 수정
+- refactor : 리펙토링
+- docs : 문서 수정
+- test : 테스트 케이스 추가
+- chore : 빌드 수정
