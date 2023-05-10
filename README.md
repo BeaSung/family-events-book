@@ -41,6 +41,16 @@
 - 검색 조건이 다양해짐에 따라, RecordBookService 에 조회용 메서드가 많아지고 클래스 라인이 길어졌다.
 - 그래서 조회용 메서드들만 GetRecordBookService 클래스로 추출해 보았다.
 
+## 카카오 로그인 구현 과정 및 몰랐던 점 정리
+
+#### 스프링에서 API 호출 방법
+
+- RestTemplate vs **WebClient**
+  - 참고) https://tecoble.techcourse.co.kr/post/2021-07-25-resttemplate-webclient/
+- Spring 6 HTTP interface
+  - 참고) https://www.baeldung.com/spring-6-http-interface
+
+
 ## Git Convention
 
 #### Commit message type
